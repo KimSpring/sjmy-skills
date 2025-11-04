@@ -178,12 +178,32 @@ flutter run
    - UI: 기본 List/Detail/Form 화면
 
 6. **설정 파일 생성** (라우팅, 스토리지, 다국어 등)
-7. **코드 생성**: `dart run build_runner build --delete-conflicting-outputs`
-8. **코드 검증 및 오류 수정**:
+7. **Android 설정 업데이트** (CRITICAL for flutter_local_notifications):
+   - `android/app/build.gradle.kts`에 core library desugaring 활성화:
+     ```kotlin
+     android {
+         compileOptions {
+             sourceCompatibility = JavaVersion.VERSION_11
+             targetCompatibility = JavaVersion.VERSION_11
+             isCoreLibraryDesugaringEnabled = true  // 추가
+         }
+     }
+     dependencies {
+         coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")  // 추가
+     }
+     ```
+8. **코드 생성**: `dart run build_runner build --delete-conflicting-outputs`
+9. **코드 검증 및 오류 수정**:
 
    a. `flutter analyze` 실행
 
    b. 발견된 오류 수정:
+   - **Freezed 3.0 호환성** (CRITICAL): 모든 Freezed 엔티티는 `sealed class` 사용
+     - ❌ `class User with _$User`
+     - ✅ `sealed class User with _$User`
+   - **테마 설정**: `CardTheme` → `CardThemeData` 사용 (deprecated)
+   - **API Client Map 타입**: `Map<String, dynamic>` 반환 시 생성 코드 검증
+     - retrofit_generator가 생성한 `dynamic.fromJson` 에러 발생 시 수정 필요
    - **import 경로 수정**: 모든 상대 경로를 `package:` 형식으로 변경
      - 예: `import '../../domain/entities/todo.dart';` → `import 'package:todo_app/domain/entities/todo.dart';`
    - **패키지 의존성 확인**: 누락된 패키지 추가 (예: `shared_preferences`)

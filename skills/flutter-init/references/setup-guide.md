@@ -105,12 +105,13 @@ android {
     compileSdk = 34
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true  // CRITICAL: flutter_local_notifications 필수
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     defaultConfig {
@@ -134,6 +135,7 @@ flutter {
 
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")  // CRITICAL: desugaring 필수
 }
 ```
 
@@ -469,7 +471,7 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
-class User with _$User {
+sealed class User with _$User {  // CRITICAL: Freezed 3.0은 sealed class 필수
   const factory User({
     required int id,
     required String name,
@@ -616,7 +618,7 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
-class User with _$User {
+sealed class User with _$User {  // CRITICAL: Freezed 3.0은 sealed class 필수
   const factory User({
     required int id,
     required String name,
@@ -664,7 +666,7 @@ part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
 @freezed
-class UserModel with _$UserModel {
+sealed class UserModel with _$UserModel {  // CRITICAL: Freezed 3.0은 sealed class 필수
   const UserModel._();
 
   const factory UserModel({
@@ -2003,7 +2005,7 @@ part 'auth_user.freezed.dart';
 part 'auth_user.g.dart';
 
 @freezed
-class AuthUser with _$AuthUser {
+sealed class AuthUser with _$AuthUser {  // CRITICAL: Freezed 3.0은 sealed class 필수
   const factory AuthUser({
     required int id,
     required String email,
@@ -2016,7 +2018,7 @@ class AuthUser with _$AuthUser {
 }
 
 @freezed
-class LoginRequest with _$LoginRequest {
+sealed class LoginRequest with _$LoginRequest {  // CRITICAL: Freezed 3.0은 sealed class 필수
   const factory LoginRequest({
     required String email,
     required String password,
@@ -2027,7 +2029,7 @@ class LoginRequest with _$LoginRequest {
 }
 
 @freezed
-class RegisterRequest with _$RegisterRequest {
+sealed class RegisterRequest with _$RegisterRequest {  // CRITICAL: Freezed 3.0은 sealed class 필수
   const factory RegisterRequest({
     required String email,
     required String password,
@@ -2039,7 +2041,7 @@ class RegisterRequest with _$RegisterRequest {
 }
 
 @freezed
-class AuthResponse with _$AuthResponse {
+sealed class AuthResponse with _$AuthResponse {  // CRITICAL: Freezed 3.0은 sealed class 필수
   const factory AuthResponse({
     required String accessToken,
     required String refreshToken,
@@ -2390,7 +2392,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'failures.freezed.dart';
 
 @freezed
-class Failure with _$Failure {
+sealed class Failure with _$Failure {  // CRITICAL: Freezed 3.0은 sealed class 필수
   const factory Failure.serverError([String? message]) = ServerError;
   const factory Failure.networkError([String? message]) = NetworkError;
   const factory Failure.cacheError([String? message]) = CacheError;
