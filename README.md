@@ -2,6 +2,23 @@
 
 Claude Code를 위한 커스텀 스킬 모음입니다. 개발 생산성을 높이기 위한 다양한 자동화 스킬들을 제공합니다.
 
+---
+
+<div align="center">
+
+### 🎴 카드로 배우는 개발 학습 플랫폼
+
+[![CodeDeck](https://img.shields.io/badge/CodeDeck-카드로_배우는_개발_플랫폼-blue?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUgNEgxOUMyMC4xIDQgMjEgNC45IDIxIDZWMThDMjEgMTkuMSAyMC4xIDIwIDE5IDIwSDVDMy45IDIwIDMgMTkuMSAzIDE4VjZDMyA0LjkgMy45IDQgNSA0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==)](https://www.codedeck.kr)
+
+프로그래밍 언어와 프레임워크를 **카드 뉴스 형태**로 쉽게 배우세요!
+`Flutter` `React` `TypeScript` `JavaScript` `Python` `Dart`
+
+**👉 [CodeDeck 바로가기](https://www.codedeck.kr)**
+
+</div>
+
+---
+
 ## 빠른 설치
 
 | 스킬 이름 | 한줄 설명 | 마켓 설치 명령어 |
