@@ -38,6 +38,7 @@ Claude Code를 위한 커스텀 스킬 모음입니다. 개발 생산성을 높�
 | **Code Prompt Coach** | Claude Code 세션 로그 분석으로 프롬프트 품질 향상 | `/plugin marketplace install suji-father-marketplace@code-prompt-coach` |
 | **Codex-Claude-Cursor Loop** | Claude + Codex + Cursor 3중 AI 엔지니어링 루프 | `/plugin marketplace install suji-father-marketplace@codex-claude-cursor-loop` |
 | **Midjourney Card News BG** | 카드 뉴스용 Midjourney 배경 이미지 프롬프트 생성 | `/plugin marketplace install suji-father-marketplace@midjourney-cardnews-bg` |
+| **Workthrough** | 모든 개발 및 수정 작업을 자동으로 문서화하여 워크스루 형식으로 저장 | `/plugin marketplace install suji-father-marketplace@workthrough` |
 
 ### 마켓플레이스 추가
 
@@ -575,6 +576,59 @@ friendly abstract shapes, approachable modern style, soft blue and mint colors, 
 - 복잡한 요소는 모서리 배치
 - 한국어 주제 지원 (영어 프롬프트 생성)
 
+### 14. [Workthrough](./skills/workthrough/)
+모든 개발 및 수정 작업을 자동으로 문서화하여 구조화된 워크스루 형식으로 저장하는 스킬입니다.
+
+**주요 기능:**
+- 개발 작업 자동 문서화 (버그 수정, 기능 구현, 리팩토링 등)
+- 구조화된 문서 형식 (개요, 변경사항, 코드 예제, 검증 결과)
+- 타임스탬프 기반 파일명
+- 프로젝트 히스토리 추적
+- 팀 지식 공유 촉진
+
+**문서 구조:**
+1. **Title & Overview**: 작업 요약
+2. **Context**: 문제 배경 및 접근 방식
+3. **Changes Made**: 파일별 상세 수정 내역
+4. **Code Examples**: Before/After 코드 스니펫
+5. **Verification Results**: 빌드/테스트 출력
+6. **Next Steps**: 후속 작업
+
+**자동 문서화 대상:**
+- ✨ 새로운 기능 구현
+- 🐛 버그 수정 및 에러 해결
+- ♻️ 코드 리팩토링
+- ⚙️ 설정 변경
+- 📦 의존성 업데이트
+- 🔧 빌드 이슈 해결
+
+**파일 저장:**
+```
+workthrough/YYYY-MM-DD-brief-description.md
+workthrough/feature-name/implementation.md
+workthrough/bugfix/issue-123.md
+```
+
+**사용 시나리오:**
+- 개발 일지 자동 생성
+- 코드 리뷰 준비 자료
+- 온보딩 문서 구축
+- 디버깅 참고 자료
+- 아키텍처 결정 기록
+- 프로젝트 진행 상황 추적
+
+**특징:**
+- 자동화: Claude가 개발 완료 후 자동 생성
+- 일관성: 표준화된 문서 형식
+- 검색 가능: 마크다운 형식으로 쉬운 검색
+- 팀 협업: 명확한 변경 이력 공유
+- 지식 보존: 미래의 자신과 팀을 위한 기록
+
+**예제:**
+- [test.md](./workthrougt-test/test.md) - 실제 워크스루 예제
+- [TEMPLATE.md](./.claude/skills/workthrough/TEMPLATE.md) - 빈 템플릿
+- [EXAMPLES.md](./.claude/skills/workthrough/EXAMPLES.md) - 다양한 시나리오 예제
+
 ## 스킬 사용 방법
 
 ### 방법 1: 마켓플레이스를 통한 설치 (권장)
@@ -635,6 +689,9 @@ friendly abstract shapes, approachable modern style, soft blue and mint colors, 
 
 # Midjourney 카드 뉴스 배경
 /plugin marketplace install suji-father-marketplace@midjourney-cardnews-bg
+
+# 워크스루 자동 문서화
+/plugin marketplace install suji-father-marketplace@workthrough
 ```
 
 #### 4. 설치된 플러그인 확인
@@ -700,6 +757,7 @@ card-news-generator (V2)   # 배경 이미지 지원 (동일 스킬, 고급 기�
 web-to-markdown            # 웹페이지를 마크다운으로 변환
 code-prompt-coach          # Claude Code 세션 로그 분석
 midjourney-cardnews-bg     # Midjourney 카드 뉴스 배경 프롬프트 생성
+workthrough                # 개발 작업 자동 문서화
 ```
 
 ## 폴더 구조
@@ -744,9 +802,16 @@ my-skills-hub/
 │   ├── codex-claude-cursor-loop/  # Claude + Codex + Cursor 3중 AI 루프
 │   │   ├── SKILL.md
 │   │   └── ...
-│   └── midjourney-cardnews-bg/  # Midjourney 카드 뉴스 배경 프롬프트
+│   ├── midjourney-cardnews-bg/  # Midjourney 카드 뉴스 배경 프롬프트
+│   │   ├── SKILL.md
+│   │   └── ...
+│   └── workthrough/             # 개발 작업 자동 문서화
 │       ├── SKILL.md
-│       └── ...
+│       ├── README.md
+│       ├── TEMPLATE.md
+│       ├── EXAMPLES.md
+│       ├── QUICKSTART.md
+│       └── LICENSE.txt
 └── README.md                     # 이 파일
 ```
 
@@ -769,6 +834,9 @@ my-skills-hub/
 - [Code Prompt Coach 상세 정보](./skills/code-prompt-coach/SKILL.md)
 - [Codex-Claude-Cursor Loop 상세 정보](./skills/codex-claude-cursor-loop/SKILL.md)
 - [Midjourney Card News BG 상세 정보](./skills/midjourney-cardnews-bg/SKILL.md)
+- [Workthrough 상세 정보](./.claude/skills/workthrough/SKILL.md)
+- [Workthrough 빠른 시작](./.claude/skills/workthrough/QUICKSTART.md)
+- [Workthrough 예제](./.claude/skills/workthrough/EXAMPLES.md)
 
 ## 기여
 
@@ -784,6 +852,25 @@ my-skills-hub/
 MIT License
 
 ## Changelog
+
+### [1.7.0] - 2025-11-19
+
+#### Added
+- **workthrough**: 개발 작업 자동 문서화 스킬 ⭐
+  - 모든 개발 작업을 구조화된 워크스루 형식으로 자동 문서화
+  - 버그 수정, 기능 구현, 리팩토링 등 모든 작업 추적
+  - 타임스탬프 기반 파일명으로 체계적 관리
+  - 코드 예제, 검증 결과, 다음 단계 자동 포함
+  - 팀 협업 및 지식 공유 촉진
+  - 6개 문서 파일: SKILL.md, README.md, TEMPLATE.md, EXAMPLES.md, QUICKSTART.md, LICENSE.txt
+
+#### Changed
+- **README.md**: workthrough 스킬 추가
+  - 빠른 설치 테이블에 workthrough 추가
+  - 스킬 목록(14번)에 상세 설명 추가
+  - 마켓플레이스 설치 명령어 추가
+  - 실행 방법 및 폴더 구조 업데이트
+  - 스킬별 상세 정보 링크 추가
 
 ### [1.6.0] - 2025-11-12
 
