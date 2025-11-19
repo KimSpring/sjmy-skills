@@ -39,6 +39,7 @@ Claude Code를 위한 커스텀 스킬 모음입니다. 개발 생산성을 높�
 | **Codex-Claude-Cursor Loop** | Claude + Codex + Cursor 3중 AI 엔지니어링 루프 | `/plugin marketplace install suji-father-marketplace@codex-claude-cursor-loop` |
 | **Midjourney Card News BG** | 카드 뉴스용 Midjourney 배경 이미지 프롬프트 생성 | `/plugin marketplace install suji-father-marketplace@midjourney-cardnews-bg` |
 | **Workthrough** | 모든 개발 및 수정 작업을 자동으로 문서화하여 워크스루 형식으로 저장 | `/plugin marketplace install suji-father-marketplace@workthrough` |
+| **Workthrough V2** | 워크스루 문서화 + VitePress 빌드로 5173 포트에서 문서 서비스 제공 | `/plugin marketplace install suji-father-marketplace@workthrough-v2` |
 
 ### 마켓플레이스 추가
 
@@ -629,6 +630,95 @@ workthrough/bugfix/issue-123.md
 - [TEMPLATE.md](./.claude/skills/workthrough/TEMPLATE.md) - 빈 템플릿
 - [EXAMPLES.md](./.claude/skills/workthrough/EXAMPLES.md) - 다양한 시나리오 예제
 
+### 15. [Workthrough V2](./skills/workthrough-v2/) 🆕
+Workthrough 스킬의 향상된 버전으로, 문서화와 함께 **VitePress 기반 문서 사이트를 자동으로 빌드**하여 제공합니다.
+
+**V2 새로운 기능:**
+- ✨ **VitePress 자동 빌드**: 워크스루 문서를 VitePress로 자동 빌드
+- ✨ **로컬 문서 서버**: http://localhost:5173 에서 문서 확인
+- ✨ **실시간 업데이트**: 문서 변경 시 자동 리로드
+- ✨ **검색 기능**: VitePress의 강력한 검색 기능 활용
+- ✨ **사이드바 자동 생성**: 타임스탬프 기반 자동 네비게이션
+- ✨ **마크다운 확장**: VitePress의 모든 마크다운 기능 사용 가능
+
+**기본 기능 (V1 동일):**
+- 개발 작업 자동 문서화 (버그 수정, 기능 구현, 리팩토링 등)
+- 구조화된 문서 형식 (개요, 변경사항, 코드 예제, 검증 결과)
+- 타임스탬프 기반 파일명
+- 프로젝트 히스토리 추적
+- 팀 지식 공유 촉진
+
+**VitePress 기능:**
+- **테마**: 깔끔한 기본 테마 및 다크 모드 지원
+- **네비게이션**: 자동 생성된 사이드바로 쉬운 탐색
+- **코드 하이라이팅**: 200+ 언어 지원
+- **반응형 디자인**: 모바일/태블릿/데스크톱 최적화
+- **빠른 로딩**: Vite 기반 번개같은 HMR
+
+**사용 흐름:**
+1. 개발 작업 완료
+2. Claude가 워크스루 문서 자동 생성 (`workthrough/YYYY-MM-DD-description.md`)
+3. VitePress 자동 빌드 및 서버 시작
+4. 브라우저에서 http://localhost:5173 접속
+5. 아름다운 문서 사이트에서 히스토리 확인
+
+**파일 구조:**
+```
+workthrough/
+├── .vitepress/
+│   ├── config.ts           # VitePress 설정
+│   └── theme/
+│       └── index.ts        # 커스텀 테마
+├── index.md                # 홈페이지
+├── 2025-11-19-feature-1.md
+├── 2025-11-18-bugfix-1.md
+└── ...
+```
+
+**서버 명령어:**
+```bash
+# 개발 서버 시작 (자동)
+npm run docs:dev
+
+# 수동으로 서버 시작
+cd workthrough && npm run dev
+
+# 정적 사이트 빌드
+npm run docs:build
+
+# 빌드 프리뷰
+npm run docs:preview
+```
+
+**V1 vs V2 비교:**
+| 기능 | V1 | V2 |
+|------|----|----|
+| 문서 자동화 | ✅ | ✅ |
+| 마크다운 저장 | ✅ | ✅ |
+| 웹 뷰어 | ❌ | ✅ VitePress |
+| 검색 기능 | ❌ | ✅ |
+| 다크 모드 | ❌ | ✅ |
+| 실시간 업데이트 | ❌ | ✅ HMR |
+| 사이드바 네비게이션 | ❌ | ✅ 자동 생성 |
+| 포트 | - | 5173 |
+
+**언제 V2를 사용하나요:**
+- ✅ 팀과 문서를 웹으로 공유하고 싶을 때
+- ✅ 아름다운 UI로 워크스루를 보고 싶을 때
+- ✅ 검색 기능이 필요할 때
+- ✅ 프로젝트 히스토리를 웹사이트로 만들고 싶을 때
+- ❌ 단순 마크다운 파일만 필요할 때 (V1 사용)
+
+**사용 시나리오:**
+- 개발 일지를 웹사이트로 퍼블리시
+- 팀 내부 지식 베이스 구축
+- 프로젝트 변경 이력 웹 대시보드
+- 온보딩 문서 사이트
+
+**포트:**
+- 기본: http://localhost:5173
+- 커스터마이징: `.vitepress/config.ts`에서 변경 가능
+
 ## 스킬 사용 방법
 
 ### 방법 1: 마켓플레이스를 통한 설치 (권장)
@@ -692,6 +782,9 @@ workthrough/bugfix/issue-123.md
 
 # 워크스루 자동 문서화
 /plugin marketplace install suji-father-marketplace@workthrough
+
+# 워크스루 자동 문서화 V2 (VitePress)
+/plugin marketplace install suji-father-marketplace@workthrough-v2
 ```
 
 #### 4. 설치된 플러그인 확인
@@ -758,6 +851,7 @@ web-to-markdown            # 웹페이지를 마크다운으로 변환
 code-prompt-coach          # Claude Code 세션 로그 분석
 midjourney-cardnews-bg     # Midjourney 카드 뉴스 배경 프롬프트 생성
 workthrough                # 개발 작업 자동 문서화
+workthrough-v2             # 개발 작업 자동 문서화 + VitePress (5173 포트)
 ```
 
 ## 폴더 구조
@@ -805,13 +899,19 @@ my-skills-hub/
 │   ├── midjourney-cardnews-bg/  # Midjourney 카드 뉴스 배경 프롬프트
 │   │   ├── SKILL.md
 │   │   └── ...
-│   └── workthrough/             # 개발 작업 자동 문서화
+│   ├── workthrough/             # 개발 작업 자동 문서화
+│   │   ├── SKILL.md
+│   │   ├── README.md
+│   │   ├── TEMPLATE.md
+│   │   ├── EXAMPLES.md
+│   │   ├── QUICKSTART.md
+│   │   └── LICENSE.txt
+│   └── workthrough-v2/          # 개발 작업 자동 문서화 + VitePress
 │       ├── SKILL.md
 │       ├── README.md
-│       ├── TEMPLATE.md
-│       ├── EXAMPLES.md
-│       ├── QUICKSTART.md
-│       └── LICENSE.txt
+│       ├── .vitepress/
+│       │   └── config.ts
+│       └── package.json
 └── README.md                     # 이 파일
 ```
 
@@ -837,6 +937,8 @@ my-skills-hub/
 - [Workthrough 상세 정보](./.claude/skills/workthrough/SKILL.md)
 - [Workthrough 빠른 시작](./.claude/skills/workthrough/QUICKSTART.md)
 - [Workthrough 예제](./.claude/skills/workthrough/EXAMPLES.md)
+- [Workthrough V2 상세 정보](./skills/workthrough-v2/SKILL.md)
+- [Workthrough V2 사용법](./skills/workthrough-v2/README.md)
 
 ## 기여
 
@@ -863,11 +965,21 @@ MIT License
   - 코드 예제, 검증 결과, 다음 단계 자동 포함
   - 팀 협업 및 지식 공유 촉진
   - 6개 문서 파일: SKILL.md, README.md, TEMPLATE.md, EXAMPLES.md, QUICKSTART.md, LICENSE.txt
+- **workthrough-v2**: VitePress 기반 워크스루 문서화 스킬 🆕
+  - Workthrough 기본 기능 + VitePress 자동 빌드
+  - http://localhost:5173 에서 문서 서비스 제공
+  - 실시간 업데이트 (HMR)
+  - 강력한 검색 기능
+  - 자동 생성 사이드바 네비게이션
+  - 다크 모드 지원
+  - 200+ 언어 코드 하이라이팅
+  - 반응형 디자인 (모바일/태블릿/데스크톱)
 
 #### Changed
-- **README.md**: workthrough 스킬 추가
-  - 빠른 설치 테이블에 workthrough 추가
-  - 스킬 목록(14번)에 상세 설명 추가
+- **README.md**: workthrough & workthrough-v2 스킬 추가
+  - 빠른 설치 테이블에 workthrough, workthrough-v2 추가
+  - 스킬 목록(14, 15번)에 상세 설명 추가
+  - V1 vs V2 비교표 추가
   - 마켓플레이스 설치 명령어 추가
   - 실행 방법 및 폴더 구조 업데이트
   - 스킬별 상세 정보 링크 추가
